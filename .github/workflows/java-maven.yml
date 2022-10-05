@@ -68,9 +68,10 @@ jobs:
           sarif_file: results.sarif
 
 #https://github.com/SpectralOps/spectral-github-action/blob/main/.github/workflows/main.yml
-  ubuntu-ci:
+  Spectral-ubuntu-ci:
     name: Spectral ubuntu CI
     runs-on: ubuntu-latest
+    needs: [codacy-security-scan]
     steps:
       - uses: actions/checkout@v2
       - name: Install and run Spectral CI
