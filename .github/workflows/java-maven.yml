@@ -67,3 +67,14 @@ jobs:
         with:
           sarif_file: results.sarif
 
+#https://github.com/SpectralOps/spectral-github-action/blob/main/.github/workflows/main.yml
+  ubuntu-ci:
+    name: Spectral ubuntu CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install and run Spectral CI
+        uses: spectralops/spectral-github-action@v2
+        with:
+          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-args: scan --ok
