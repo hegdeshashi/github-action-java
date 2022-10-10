@@ -80,4 +80,4 @@ jobs:
         url: 'https://sixartifact.jfrog.io/'
         credentials type: 'apikey'
         apikey: ${{ secrets.RT_APIKEY }}
-        args: u "(*).tgz" my-local-repo/{1}/ --recursive=false
+        args: u " *.tgz" my-local-repo/{1}/ --recursive=false
