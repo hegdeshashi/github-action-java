@@ -95,4 +95,4 @@ jobs:
         url: 'https://sixartifact.jfrog.io/'
         credentials type: 'apikey'
         apikey: ${{ secrets.RT_APIKEY }}
-        args: jfrog rt u myawesomeapp
+        args: u "dist/*" "/" --recursive=true --build-name=myawesomeapp
