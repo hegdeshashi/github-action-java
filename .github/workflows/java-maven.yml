@@ -82,3 +82,18 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  artifactoryUpload:
+    name: Upload Trigger
+    runs-on: ubuntu-latest
+    needs: [SonarCloud-scan]
+    steps:
+    - uses: actions/checkout@v1.2.0
+    - name: build
+      run: ./buildmyartifact.sh
+    - name: publish to artifactory
+      uses: advancedcsg-open/action-jfrog-cli@master
+      with:
+        url: 'https://sixartifact.jfrog.io/'
+        credentials type: 'apikey'
+        apikey: ${{ secrets.RT_APIKEY }}
+        args: u "dist/*" "/mu/repo/path/" --recursive=true --build-name=myawesomeapp
