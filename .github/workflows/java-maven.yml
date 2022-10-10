@@ -95,4 +95,4 @@ jobs:
         url: 'https://sixartifact.jfrog.io/'
         credentials type: 'apikey'
         apikey: ${{ secrets.RT_APIKEY }}
-        args: u *.tgz github-action-java
+        args: u * github-action-java
