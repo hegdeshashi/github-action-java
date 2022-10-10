@@ -95,4 +95,4 @@ jobs:
         url: 'https://sixartifact.jfrog.io/'
         credentials type: 'apikey'
         apikey: ${{ secrets.RT_APIKEY }}
-        args: u swdp-dev-orders swdp-dev-orders
+        args: u github-action-java.tgz /artifactory/swdp-dev-orders
