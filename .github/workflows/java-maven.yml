@@ -90,9 +90,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1.2.0
     - name: publish to artifactory
-      uses: advancedcsg-open/action-jfrog-cli@master
-      with:
-        url: 'https://sixartifact.jfrog.io/'
+      #uses: advancedcsg-open/action-jfrog-cli@master
+      run: jfrog rt upload *.tgz repo-name/ --url='https://sixartifact.jfrog.io/'
+      env:
+      #with:
+      #  url: 'https://sixartifact.jfrog.io/'
         credentials type: 'apikey'
         apikey: ${{ secrets.RT_APIKEY }}
-        args: u 
+      #  args: u 
