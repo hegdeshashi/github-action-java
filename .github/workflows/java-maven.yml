@@ -39,8 +39,8 @@ jobs:
       -  run: mvn -B package --file pom.xml -DskipTests 
       
       #- name: Test
-      -  run: mvn install -DskipTests
-      - run: mvn -o test
+      - run: mvn install -DskipTests
+      - run: mvn -B test --file pom.xml
       
       - name: Report
         #uses: dorny/test-reporter@v1.5.0
