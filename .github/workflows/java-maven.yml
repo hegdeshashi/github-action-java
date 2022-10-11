@@ -42,7 +42,7 @@ jobs:
     - name: Build with Maven
       run: mvn compile
     - name: Test with Maven
-      run: mvn test
+      run: mvn clean test --batch-mode -Dmaven.test.failure.ignore=true
     - name: Package with maven
       run: mvn package
     - run: mkdir artifact && cp target/*.jar artifact
