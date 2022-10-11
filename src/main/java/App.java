@@ -1,13 +1,23 @@
-public class App
-{
-    public static void main( String[] args )
-    {
-        DeepThought ourSuperComputer = new DeepThought();
-        int ans = ourSuperComputer.answer_to_the_ultimate_question_of_life_the_universe_and_everything();
+package org.piki;
 
-        RedisJava cache = new RedisJava();
-        cache.cache_value("answer_to_the_ultimate_question_of_life_the_universe_and_everything",String.valueOf(ans));
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Here are some Fibonacci numbers:");
+        for (int i=1; i<=10; i++) {
+            System.out.println(i + ": " + fibonacci(i));
+        }
+    }
 
-        System.out.println("Cached value: " + cache.get_cached_value("answer_to_the_ultimate_question_of_life_the_universe_and_everything"));
+    public static long fibonacci(int n) {
+        if (n <= 2) return 1;
+
+        long a = 1, b = 1;
+        for (int i=2; i<n; i++) {
+            long t = a;
+            a = b;
+            b = b + t;
+        }
+
+        return b;
     }
 }
