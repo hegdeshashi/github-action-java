@@ -41,5 +41,6 @@ jobs:
         url: 'https://sixartifact.jfrog.io/'
         credentials type: 'apikey'
         apikey: ${{ secrets.RT_APIKEY }}
-        args: u "dist/*" "/default-docker-local/swdp-dev-orders/" --recursive=true --build-name=myawesomeapp
+        #args: u "dist/*" "/default-docker-local/swdp-dev-orders/" --recursive=true --build-name=myawesomeapp
+        args: u "target/*.jar" "/libs-snapshot-repo-libs-release-local" --recursive=true --build-name=myawesomeapp   
           
