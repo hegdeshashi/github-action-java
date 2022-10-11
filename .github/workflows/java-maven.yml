@@ -34,6 +34,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v1
+        
+      - name: Build project with Maven
+        run: mvn -B package --file pom.xml -DskipTests 
+      
       - name: Test
         run: mvn clean test 
         
