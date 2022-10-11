@@ -35,7 +35,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v1
       - name: Test
-        run: mvn clean test -Denv=DEV -DtestngXML='tableView.xml'
+        run: mvn clean test -DtestngXML='tableView.xml'
         
       - name: Report
         uses: dorny/test-reporter@v1.5.0
