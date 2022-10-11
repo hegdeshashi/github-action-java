@@ -105,6 +105,8 @@ jobs:
     needs: [SonarCloud-scan]
     steps:
     - uses: actions/checkout@v1.2.0
+    - name: build
+      run: mvn -B package --file pom.xml -DskipTests 
     - name: publish to artifactory
       uses: advancedcsg-open/action-jfrog-cli@master
       with:
