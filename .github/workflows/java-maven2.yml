@@ -81,8 +81,12 @@ jobs:
         - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
         - uses: actions/upload-artifact@v1
           with:
-            name: Package-TIME
+            name: Package-$TIME
             path: staging
+        - uses: actions/upload-artifact@v1
+          with:
+            name: PPPackage-${{ steps.current-time.outputs.time }}
+            path: staging    
             
   #Refer for container: https://medium.com/@alexander.volminger/ci-cd-for-java-maven-using-github-actions-d009a7cb4b8f
   
