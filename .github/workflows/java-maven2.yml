@@ -53,10 +53,12 @@ jobs:
           with:
             java-version: 14
         - run: mvn -B package --file pom.xml -DskipTests
+          id: date
+        - run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
         - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
         - uses: actions/upload-artifact@v1
           with:
-            name: Package
+            name: Package-${{ steps.date.outputs.date }}
             path: staging
             
   #Refer for container: https://medium.com/@alexander.volminger/ci-cd-for-java-maven-using-github-actions-d009a7cb4b8f
