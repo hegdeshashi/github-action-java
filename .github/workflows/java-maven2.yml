@@ -76,14 +76,14 @@ jobs:
         - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
         - uses: actions/upload-artifact@v1
           with:
-            name: Package-$TIME
+            name: Package-TIME
             path: staging
             
   #Refer for container: https://medium.com/@alexander.volminger/ci-cd-for-java-maven-using-github-actions-d009a7cb4b8f
   
   SAST-Snyk:
     runs-on: ubuntu-latest
-    needs: [Test]
+    needs: [Build]
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
@@ -98,7 +98,7 @@ jobs:
     
   SonarCloud-scan:
     runs-on: ubuntu-latest
-    needs: [Test]
+    needs: [Build]
     steps:
     - uses: actions/checkout@v2
       with:
