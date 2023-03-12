@@ -66,18 +66,6 @@ jobs:
               YEAR: "${{ steps.current-time.outputs.year }}"
               DAY: "${{ steps.current-time.outputs.day }}"
           run: echo $TIME $R_TIME $F_TIME $YEAR $DAY
-          id: date        
-        - run: |
-            echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
-        - run: echo $TAG_NAME - $RELEASE_NAME
-          env:
-            TAG_NAME: nightly-tag-${{ env.date }}
-            RELEASE_NAME: nightly-release-${{ env.date }}    
-        - run: echo $TAG_NAME - $RELEASE_NAME
-          env:
-            TAG_NAME: nightly-tag-${{ steps.date.outputs.date }}
-            RELEASE_NAME: nightly-release-${{ steps.date.outputs.date }}
-        #- run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
         - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
         - uses: actions/upload-artifact@v1
           with:
