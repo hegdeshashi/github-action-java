@@ -81,10 +81,6 @@ jobs:
         - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
         - uses: actions/upload-artifact@v1
           with:
-            name: Package-$TIME
-            path: staging
-        - uses: actions/upload-artifact@v1
-          with:
             name: PPPackage-${{ steps.current-time.outputs.time }}
             path: staging    
             
