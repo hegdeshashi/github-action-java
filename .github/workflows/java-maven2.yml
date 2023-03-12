@@ -53,8 +53,13 @@ jobs:
           with:
             java-version: 14
         - run: mvn -B package --file pom.xml -DskipTests
-          id: date
-        - run: echo "date::$(date +'%Y-%m-%d') >> $GITHUB_OUTPUT"
+          id: date        
+        - run: |
+            echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+        - run: echo $TAG_NAME - $RELEASE_NAME
+          env:
+            TAG_NAME: nightly-tag-${{ env.date }}
+            RELEASE_NAME: nightly-release-${{ env.date }}    
         - run: echo $TAG_NAME - $RELEASE_NAME
           env:
             TAG_NAME: nightly-tag-${{ steps.date.outputs.date }}
@@ -63,7 +68,7 @@ jobs:
         - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
         - uses: actions/upload-artifact@v1
           with:
-            name: Package-${{ steps.date.outputs.date }}
+            name: Package-${{ env.date }}
             path: staging
             
   #Refer for container: https://medium.com/@alexander.volminger/ci-cd-for-java-maven-using-github-actions-d009a7cb4b8f
