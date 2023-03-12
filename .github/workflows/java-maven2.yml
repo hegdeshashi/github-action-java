@@ -54,7 +54,8 @@ jobs:
             java-version: 14
         - run: mvn -B package --file pom.xml -DskipTests
           id: date
-        - run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        #- run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        - run: echo "date::$(date +'%Y-%m-%d') >> $GITHUB_OUTPUT"
         - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
         - uses: actions/upload-artifact@v1
           with:
