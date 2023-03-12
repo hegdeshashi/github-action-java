@@ -54,6 +54,10 @@ jobs:
             java-version: 14
         - run: mvn -B package --file pom.xml -DskipTests
         - uses: josStorer/get-current-time@v2
+          id: current-time
+          with:
+            format: YYYYMMDD-HH
+            utcOffset: "+08:00"
           env:
               TIME: "${{ steps.current-time.outputs.time }}"
               R_TIME: "${{ steps.current-time.outputs.readableTime }}"
