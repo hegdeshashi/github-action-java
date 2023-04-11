@@ -104,7 +104,7 @@ jobs:
     #if: github.event.inputs.SAST-Snyk == 'true' && (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') && (needs.Test.result == 'success' || needs.Test.result == 'skipped')
     runs-on: ubuntu-latest
     needs: [Artifact]
-    if: github.event.inputs.SAST-Snyk == 'true' && (needs.Artifact.result == 'success' || needs.Artifact.result == 'false') 
+    if: (github.event.inputs.SAST-Snyk == 'true') && (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') 
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
@@ -121,7 +121,7 @@ jobs:
     #if: github.event.inputs.SonarCloud-scan == 'true' && (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') && (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped') && (needs.Test.result == 'success' || needs.Test.result == 'skipped') && (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped')
     runs-on: ubuntu-latest
     needs: [SAST-Snyk]
-    if: github.event.inputs.SonarCloud-scan == 'true' && (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') && (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped') && (needs.Test.result == 'success' || needs.Test.result == 'false') && (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'false')
+    if: (github.event.inputs.SonarCloud-scan == 'true' ) && (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') || (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped') && (needs.Test.result == 'success' || needs.Test.result == 'skipped') || (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped')
     steps:
     - uses: actions/checkout@v2
       with:
