@@ -11,6 +11,22 @@ on:
         options: 
         - 'true'
         - 'false'
+      SAST-Snyk:
+        description: 'SAST-Snyk test'
+        type: choice
+        #required: true
+        #default: 'true'
+        options: 
+        - 'true'
+        - 'false'   
+      SonarCloud-scan:
+        description: 'SonarCloud-scan test'
+        type: choice
+        #required: true
+        #default: 'true'
+        options: 
+        - 'true'
+        - 'false' 
 
 
 jobs:
