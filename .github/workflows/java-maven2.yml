@@ -82,7 +82,7 @@ jobs:
   
   SAST-Snyk:
     runs-on: ubuntu-latest
-    needs: [Artifact]
+    #needs: [Artifact]
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
@@ -97,7 +97,7 @@ jobs:
     
   SonarCloud-scan:
     runs-on: ubuntu-latest
-    needs: [SAST-Snyk]
+    #needs: [SAST-Snyk]
     steps:
     - uses: actions/checkout@v2
       with:
