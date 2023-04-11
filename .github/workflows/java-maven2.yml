@@ -50,6 +50,7 @@ jobs:
           report_paths: '**/surefire-reports/TEST-*.xml' 
   
   Artifact:
+      if: github.event.inputs.Artifact == 'true'
       runs-on: ubuntu-latest
       needs: [Test]
       steps:
