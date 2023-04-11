@@ -100,8 +100,9 @@ jobs:
   #Refer for container: https://medium.com/@alexander.volminger/ci-cd-for-java-maven-using-github-actions-d009a7cb4b8f
   
   SAST-Snyk:
+    if: github.event.inputs.SAST-Snyk == 'true'
     runs-on: ubuntu-latest
-    #needs: [Artifact]
+    needs: [Artifact]
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
@@ -115,6 +116,7 @@ jobs:
 
     
   SonarCloud-scan:
+    if: github.event.inputs.SonarCloud-scan == 'true'
     runs-on: ubuntu-latest
     #needs: [SAST-Snyk]
     steps:
