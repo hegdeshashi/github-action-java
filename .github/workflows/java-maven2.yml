@@ -121,7 +121,7 @@ jobs:
     #if: github.event.inputs.SonarCloud-scan == 'true' && (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') && (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped') && (needs.Test.result == 'success' || needs.Test.result == 'skipped') && (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped')
     runs-on: ubuntu-latest
     needs: [SAST-Snyk,Artifact]
-    if: (github.event.inputs.SonarCloud-scan == 'true' ) && (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') || (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped') && (needs.Test.result == 'success' || needs.Test.result == 'skipped') || (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped')
+    if: (github.event.inputs.SonarCloud-scan == 'true' ) && ((needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') || (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped'))
     steps:
     - uses: actions/checkout@v2
       with:
