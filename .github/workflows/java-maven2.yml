@@ -2,6 +2,11 @@
 name: Java-maven2
 on: 
   workflow_dispatch:
+    inputs:
+      Artifact:
+        description: 'Publish artifacts'
+        required: true
+        default: 'true'
 
 
 
