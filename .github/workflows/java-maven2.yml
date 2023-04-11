@@ -5,6 +5,7 @@ on:
     inputs:
       Artifact:
         description: 'Publish artifacts'
+        type: choice
         #required: true
         #default: 'true'
         options: 
