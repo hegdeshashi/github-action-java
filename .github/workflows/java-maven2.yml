@@ -64,7 +64,7 @@ jobs:
     if: github.event.inputs.Build == 'true'  
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       #- name: Build and Run Tests
         #run: mvn test --batch-mode --fail-at-end
       - run: mvn -B package --file pom.xml -DskipTests 
