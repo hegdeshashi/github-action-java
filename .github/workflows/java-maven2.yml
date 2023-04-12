@@ -41,14 +41,14 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     - name: Set up JDK 14
-      uses: actions/setup-java@v2
+      uses: actions/setup-java@v1
       with:
         java-version: 14
 
     - name: Cache the Maven packages to speed up build
-      uses: actions/cache@v2
+      uses: actions/cache@v1
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
@@ -64,7 +64,7 @@ jobs:
     if: github.event.inputs.Build == 'true'  
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       #- name: Build and Run Tests
         #run: mvn test --batch-mode --fail-at-end
       - run: mvn -B package --file pom.xml -DskipTests 
@@ -86,8 +86,8 @@ jobs:
         (!cancelled()) &&
         (needs.Test.result == 'success' || needs.Test.result == 'skipped')
       steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-java@v2
+        - uses: actions/checkout@v2
+        - uses: actions/setup-java@v1
           with:
             java-version: 14
         - run: mvn -B package --file pom.xml -DskipTests
