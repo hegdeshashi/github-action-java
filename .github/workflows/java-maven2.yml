@@ -3,6 +3,14 @@ name: Java-maven2
 on: 
   workflow_dispatch:
     inputs:
+      Test:
+        description: 'Test report'
+        type: choice
+        #required: true
+        #default: 'true'
+        options: 
+        - 'true'
+        - 'false'
       Artifact:
         description: 'Publish artifacts'
         type: choice
@@ -53,6 +61,7 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
     needs: [Build]
+    if: github.event.inputs.Build == 'true'  
     steps:
       - name: Checkout Code
         uses: actions/checkout@v1
@@ -103,11 +112,12 @@ jobs:
   SAST-Snyk:
     #if: github.event.inputs.SAST-Snyk == 'true' && (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') && (needs.Test.result == 'success' || needs.Test.result == 'skipped')
     runs-on: ubuntu-latest
-    needs: [Artifact]
+    needs: [Artifact,Test]
     if: |
       (github.event.inputs.SAST-Snyk == 'true') && 
       (!cancelled()) &&
-      (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') 
+      ((needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') ||
+      (needs.Test.result == 'success' || needs.Test.result == 'skipped'))
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
@@ -123,12 +133,13 @@ jobs:
   SonarCloud-scan:
     #if: github.event.inputs.SonarCloud-scan == 'true' && (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') && (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped') && (needs.Test.result == 'success' || needs.Test.result == 'skipped') && (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped')
     runs-on: ubuntu-latest
-    needs: [SAST-Snyk,Artifact]
+    needs: [SAST-Snyk,Artifact,Test]
     if: |
       (github.event.inputs.SonarCloud-scan == 'true' ) && 
       (!cancelled()) &&
       ((needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') || 
-      (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped'))
+      (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped') ||
+      (needs.Test.result == 'success' || needs.Test.result == 'skipped'))
     steps:
     - uses: actions/checkout@v2
       with:
