@@ -41,7 +41,7 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up JDK 14
       uses: actions/setup-java@v1
       with:
@@ -64,7 +64,7 @@ jobs:
     if: github.event.inputs.Build == 'true'  
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       #- name: Build and Run Tests
         #run: mvn test --batch-mode --fail-at-end
       - run: mvn -B package --file pom.xml -DskipTests 
