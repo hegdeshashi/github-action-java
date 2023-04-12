@@ -106,7 +106,7 @@ jobs:
     needs: [Artifact]
     if: |
       (github.event.inputs.SAST-Snyk == 'true') && 
-      (always()) &&
+      (!cancelled()) &&
       (needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') 
     steps:
       - uses: actions/checkout@master
@@ -125,7 +125,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [SAST-Snyk,Artifact]
     if: |
-      (github.event.inputs.SonarCloud-scan == 'false' ) && 
+      (github.event.inputs.SonarCloud-scan == 'true' ) && 
+      (!cancelled()) &&
       ((needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') || 
       (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped'))
     steps:
