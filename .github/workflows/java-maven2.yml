@@ -122,7 +122,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [SAST-Snyk,Artifact]
     if: |
-      (github.event.inputs.SonarCloud-scan == 'true' ) && 
+      (github.event.inputs.SonarCloud-scan == 'false' ) && 
       ((needs.Artifact.result == 'success' || needs.Artifact.result == 'skipped') || 
       (needs.SAST-Snyk.result == 'success' || needs.SAST-Snyk.result == 'skipped'))
     steps:
