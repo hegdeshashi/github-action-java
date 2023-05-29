@@ -1,5 +1,5 @@
 #name of the workflow
-name: Java-maven2
+name: Java-maven3
 on: 
   workflow_dispatch:
     inputs:
